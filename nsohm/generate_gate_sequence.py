@@ -39,18 +39,4 @@ def get_qft_native_sequence(n_qubits=8):
             phi = np.pi / (2 ** (control - target))
             apply_cp(phi, control, target)
 
-    # --- run and print the resulting statevector ---
-    dev = qml.device("default.qubit", wires=n_qubits)
-    @qml.qnode(dev)
-    def circuit():
-        for g in seq:
-            name = g[0]
-            if name == "RX":
-                _, a, q = g; qml.RX(a, wires=q)
-            elif name == "RY":
-                _, a, q = g; qml.RY(a, wires=q)
-            else:  # MS
-                _, a, c, t = g; qml.IsingXX(a, wires=[c, t])
-        return qml.state()
-
     return seq

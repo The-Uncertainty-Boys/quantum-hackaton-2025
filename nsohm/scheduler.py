@@ -7,6 +7,7 @@ def schedule(trap: nx.Graph, sequence: list) -> tuple:
     node_index = {node: idx for idx, node in enumerate(nodes)}
     # Upper bound on time horizon (e.g., 2 * number of gates as a rough bound)
     horizon = len(sequence) * 2  
+    horizon = 10
 
     model = cp_model.CpModel()
     # Position variables: x[i,n,t] = 1 if ion i at node n at time t
