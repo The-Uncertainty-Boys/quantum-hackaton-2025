@@ -53,10 +53,4 @@ def get_qft_native_sequence(n_qubits=8):
                 _, a, c, t = g; qml.IsingXX(a, wires=[c, t])
         return qml.state()
 
-    state = circuit()
-    print("\n--- Compiled QFT Output Statevector ---")
-    for idx, amp in enumerate(state):
-        print(f"|{idx:03}>: {amp:.4f}")
-    print(f"(All {len(state)} amplitudes should be 0.0625+0j.)\n")
-
     return seq
