@@ -7,6 +7,8 @@ All the resources and materials for this challenge are available in the reposito
 
 Feel free to clone the repository and submit issues if you encounter any. You can also ask all your physics, ion-trap, and quantum-related questions there or directly to the on-site ZuriQ representative.
 
+UPDATE: Pavel will hang around Fusion (where we had dinner on Friday) if you wish to find him. 
+
 ---
 
 ## What is a Penning Trap?
