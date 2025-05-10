@@ -6,6 +6,7 @@ from matplotlib.animation import FuncAnimation
 from PIL import Image
 import glob
 import os
+import re
 
 # Ensure the directory exists
 os.makedirs('img', exist_ok=True)
@@ -75,6 +76,11 @@ positions_history_advanced = [
 ]
 
 
+def natural_sort_key(s):
+    # Split string into list of strings and numbers
+    return [int(text) if text.isdigit() else text.lower() for text in re.split('([0-9]+)', s)]
+
+
 # DRAW the current state of the Penning Trap
 def draw_current_state(last_state, list_nr, show_frame):
 
@@ -104,7 +110,7 @@ def draw_current_state(last_state, list_nr, show_frame):
         ax.scatter([], [], c='yellow', s=200, marker='*', 
                 edgecolors='k', label='1 Qubit')
     if '2 Qubits' not in existing_labels:
-        ax.scatter([], [], c='magenta', s=300, marker='*',
+        ax.scatter([], [], c='magenta', s=100, marker='D',
                 edgecolors='k', label='2 Qubits')
 
     # Create legend with unique entries
@@ -124,7 +130,7 @@ def draw_current_state(last_state, list_nr, show_frame):
                 ax.scatter(x, y, z, c='yellow', s=200, marker='*', edgecolors='k', label='1 Qubit')
             else:
                 # plot double qubits
-                ax.scatter(x, y, z, c='magenta', s=300, marker='*', edgecolors='k', label='2 Qubits')
+                ax.scatter(x, y, z, c='magenta', s=100, marker='D', edgecolors='k', label='2 Qubits')
         else:
             # Handle idle nodes if needed
             print("Error: position might be invalid")
@@ -165,7 +171,7 @@ def draw_current_state(last_state, list_nr, show_frame):
         plt.show()
 
 # example usage for only one frame
-draw_current_state(positions_history_advanced[-1], len(positions_history_advanced)-1, SHOW_FRAME, )
+# draw_current_state(positions_history_advanced[-1], len(positions_history_advanced)-1, SHOW_FRAME, )
 
 
 def animate_positions_history(positions_history, show_frames):
@@ -175,7 +181,10 @@ def animate_positions_history(positions_history, show_frames):
 
     # Create the frames
     frames = []
-    imgs = sorted(glob.glob("img/*.png"))
+    imgs_raw = glob.glob("img/*.png")
+    
+    imgs = sorted(imgs_raw, key=natural_sort_key)
+
     for i in imgs:
         new_frame = Image.open(i)
         frames.append(new_frame)
@@ -184,8 +193,9 @@ def animate_positions_history(positions_history, show_frames):
     frames[0].save('img/png_to_gif.gif', format='GIF',
                 append_images=frames[1:],
                 save_all=True,
-                duration=1200, loop=0)
+                duration=600, loop=0)
+    
 
 
 # example usage for whole animation
-animate_positions_history(positions_history_advanced, SHOW_FRAME)
+# animate_positions_history(positions_history_advanced, SHOW_FRAME)
