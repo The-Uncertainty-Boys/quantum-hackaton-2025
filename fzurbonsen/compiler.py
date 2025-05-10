@@ -13,16 +13,11 @@ import verifier # Import verifier module
 
 n_qubits = 8
 
+n_ = 0.01
+
 dev = qml.device("default.mixed", wires=n_qubits)
 dev0 = qml.device("default.mixed", wires=n_qubits)
 dev1 = qml.device("default.mixed", wires=n_qubits)
-
-ms_gate = np.exp(1j * np.pi / 4) / np.sqrt(2) * np.array([
-    [1, 0, 0, -1j],
-    [0, 1, -1j, 0],
-    [0, -1j, 1, 0],
-    [-1j, 0, 0, 1]
-])
 
 gates_schedule = []
 positions_history = []
@@ -32,11 +27,17 @@ def add_to_schedule(gate_type, param, wires):
     """Helper function to add gate to the current time step schedule."""
     while len(gates_schedule) <= time_step:
         gates_schedule.append([])  # Ensure enough time slots
-    gates_schedule[time_step].append((gate_type, round(param, 2), wires))
+    gates_schedule[time_step].append((gate_type, param, wires))
+
+def build_ms_gate(theta):
+    I = np.eye(2)
+    X = np.array([[0, 1], [1, 0]])
+    XX = np.kron(X, X)
+    return np.cos(theta / 2) * np.eye(4) - 1j * np.sin(theta / 2) * XX
 
 def apply_ms_gate(wire1, wire2, theta):
-    qml.QubitUnitary(ms_gate, wires=[wire1, wire2])
-    # qml.IsingXX(theta, wires=[wire1, wire2])
+    U = build_ms_gate(theta)
+    qml.QubitUnitary(U, wires=[wire1, wire2])
     print(f"MS, {theta/np.pi}*pi, [{wire1}, {wire2}]")
     add_to_schedule("MS", theta, (wire1, wire2))
 
@@ -56,26 +57,54 @@ def apply_hadamard_approx(wire):
     apply_rx_gate(wire, np.pi)
     print("\n")
 
-def apply_controlled_phase_approx(control, target, angle):
-    return 0
+def apply_isingXX_gate(control, target, theta):
+    apply_ry_gate(target, -np.pi/2)
+    apply_ry_gate(control, -np.pi/2)
+    apply_ms_gate(control, target, theta)
+    apply_ry_gate(target, np.pi/2)
+    apply_ry_gate(control, np.pi/2)
+
+def apply_cnot_approx(control, target):
+    apply_ry_gate(control, np.pi/2)
+    # apply_ms_gate(control, target, np.pi/4*n_)
+    qml.IsingXX(np.pi/2*n_, wires=[control, target])
+    # apply_isingXX_gate(control, target, np.pi/4*n_)
+    apply_rx_gate(target, -np.pi/2*n_)
+    apply_rx_gate(control, -np.pi/2*n_)
+    apply_ry_gate(control, -np.pi/2)
+
+def apply_rz_approx(wire, theta):
+    apply_ry_gate(wire, np.pi/2)
+    apply_rx_gate(wire, theta)
+    apply_ry_gate(wire, -np.pi/2)
 
 def apply_controlled_phase(control, target, angle):
     print(f"P, {angle/np.pi}*pi, {target}, {control}")
-    # apply_ry_gate(control, -np.pi/2)
-    # apply_ry_gate(target, -np.pi/2)
-    # apply_ms_gate(control, target, np.pi/4)
-    # apply_rx_gate(target, -angle/2)
-    # apply_ms_gate(control, target, -np.pi/4)
-    # apply_ry_gate(control, np.pi/2)
-    # apply_ry_gate(target, np.pi/2)
-
     apply_ry_gate(control, -np.pi/2)
-    apply_ry_gate(target, np.pi/2)
-    apply_rx_gate(control, -np.pi/2)
-    apply_rx_gate(target, np.pi/2)
-    apply_ms_gate(target, control, angle/4)
+    apply_ry_gate(target, -np.pi/2*n_)
+
+    apply_ms_gate(control, target, np.pi/4*n_)
+    apply_rx_gate(target, -angle/2*n_)
+    apply_ms_gate(control, target, -np.pi/4*n_)
+
+    # num_iterations = 2
+
+    # for i in range(num_iterations):
+    #     # Middle section with phase shifts and rotations
+    #     apply_ms_gate(control, target, np.pi/4 * n_ / (i + 1))  # Increase phase shift incrementally
+    #     apply_rx_gate(target, -angle/2 * n_ / (i + 1))  # Adjust angle iteratively
+    #     apply_ms_gate(control, target, -np.pi/4 * n_ / (i + 1))  # Apply inverse phase shift
+
     apply_ry_gate(control, np.pi/2)
-    apply_ry_gate(target, -np.pi/2)
+    apply_ry_gate(target, np.pi/2*n_)
+
+    # apply_ry_gate(control, -np.pi/2)
+    # apply_ry_gate(target, np.pi/2)
+    # apply_rx_gate(control, -np.pi/2)
+    # apply_rx_gate(target, np.pi/2)
+    # apply_ms_gate(target, control, angle/4)
+    # apply_ry_gate(control, np.pi/2)
+    # apply_ry_gate(target, -np.pi/2)
 
     # apply_ry_gate(control, -np.pi/2)
     # apply_ry_gate(target, -np.pi/2)
@@ -85,28 +114,12 @@ def apply_controlled_phase(control, target, angle):
     # apply_ry_gate(control, np.pi/2)
     # apply_ry_gate(target, np.pi/2)
 
+    # apply_cnot_approx(control, target)
+    # apply_rz_approx(target, angle)
+    # apply_cnot_approx(control, target)
+
     # qml.ControlledPhaseShift(angle, wires=[control, target])
     print("\n")
-
-@qml.qnode(dev)
-def qft_like_circuit():
-    global time_step
-
-    for target in range(n_qubits):
-        apply_hadamard_approx(target)
-
-        # Move to the next time step
-        time_step += 1
-
-        for control in range(target + 1, n_qubits):
-            angle = np.pi / (2 ** (control - target))
-            apply_controlled_phase_approx(control, target, angle)
-
-        # Move to the next time step after controlled-phase set
-        time_step += 1
-
-    # print(qml.density_matrix(wires=range(n_qubits)))
-    return qml.density_matrix(wires=range(n_qubits))
 
 @qml.qnode(dev0)
 def qft_circuit():
@@ -147,14 +160,42 @@ def print_gate_schedule(schedule):
 
 # Run and get final state
 # state = qft_like_circuit()
+np.set_printoptions(linewidth=200, precision=5, suppress=True)
 state = qft_circuit()
-print(state)
+# print(state)
 # print("Quantum state after approximate QFT with RX, RY, MS:", state)
 
 # print(qml.density_matrix(wires=range(8)))
 
 bench = qft_bench()
-print(bench)
+# print(bench)
+
+np.set_printoptions(threshold=np.inf, linewidth=np.inf, precision=5, suppress=True)
+
+
+# with open("qft_output.txt", "w") as f:
+#     f.write("State (Custom QFT Approx):\n")
+#     f.write(str(state) + "\n\n")
+    
+#     f.write("Bench (qml.QFT):\n")
+#     f.write(str(bench) + "\n\n")
+
+np.set_printoptions(threshold=200, linewidth=200, precision=5, suppress=True)
+    
+
+print("Max difference:", np.max(np.abs(state - bench)))
+print("Are they close?", np.allclose(state, bench, atol=1e-3))
+print("Fidelity: ", np.abs(np.vdot(state, bench)))
+
+diff_matrix = np.abs(state - bench)
+max_diff_idx = np.unravel_index(np.argmax(diff_matrix), diff_matrix.shape)
+print(f"Largest difference at index {max_diff_idx}:")
+print(f"state: {state[max_diff_idx]}")
+print(f"bench: {bench[max_diff_idx]}")
+
+ms = build_ms_gate(np.pi/4*n_)
+
+print(ms)
 
 # print_gate_schedule(gates_schedule)
 

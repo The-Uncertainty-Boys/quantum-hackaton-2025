@@ -230,10 +230,9 @@ def verifier(positions_history, gates_schedule, graph) -> None:
     # print("Positions and gates are valid.")
     print("Verifying the fidelity of the circuit without adding noise...")
     expected_result = circuit()
-    print(expected_result)
     user_result = compiled_circuit(gates_schedule)()
     # user_fidelity = qml.math.fidelity(expected_result, user_result)
     # print("Fidelity of the circuit:", user_fidelity)
-    if not np.allclose(expected_result, user_result, atol=1e-3):
+    if not np.allclose(expected_result, user_result, atol=1e-5):
         raise ValueError(f"The compiled circuit does not implement QFT({n_wires}).")
     print(f"The compiled circuit implements QFT({n_wires}).")
