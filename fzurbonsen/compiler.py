@@ -249,12 +249,41 @@ print(f"bench: {bench[max_diff_idx]}")
 # Create the trap graph
 graph = trap.create_trap_graph()
 
+# remove redundant gates
+gate_idx = 0
+gate_lists_new = [[] for _ in range(n_qubits)]
 
-adj_mat = [[0 for __ in range(gate_id)] for _ in range(gate_id)]
-gates = [None for _ in range(gate_id)]
+for lst_idx, lst in enumerate(gate_lists):
+    new_lst = []
+    i = 0
+    while i < len(lst):
+        curr = lst[i]
+        curr_type = curr.type
+        curr_theta = curr.theta
+        j = i + 1
+
+        # Accumulate thetas for same-type gates
+        while j < len(lst) and lst[j].type == curr_type:
+            curr_theta += lst[j].theta
+            j += 1
+
+        # Only keep gate if total theta ≠ 0
+        if curr_theta != 0:
+            merged_gate = QGate.QGate(gate_idx, curr_type, curr.qubit1, curr.qubit2, curr_theta)
+            gate_lists_new[lst_idx].append(merged_gate)
+            gate_idx += 1
+
+        i = j  # move to the next non-merged gate
+
+gate_lists = []
+
+adj_mat = [[0 for __ in range(gate_idx)] for _ in range(gate_idx)]
+gates = [None for _ in range(gate_idx)]
+                    
+
 
 # store hierarchy in QGate struct
-for lst in gate_lists:
+for lst in gate_lists_new:
     for i in range(len(lst)):
         curr = lst[i]
         if i > 0:
@@ -293,7 +322,6 @@ with open("qft_output.txt", "w") as f:
     for i in gates_schedule :
         f.write(str(i) + "\n")
 
-        
 
 verifier.verifier(positions_history, gates_schedule, graph)
 
