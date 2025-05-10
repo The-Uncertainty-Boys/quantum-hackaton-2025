@@ -169,6 +169,7 @@ def draw_current_state(last_state, list_nr, show_frame):
 
     if (show_frame):
         plt.show()
+    plt.close()
 
 # example usage for only one frame
 # draw_current_state(positions_history_advanced[-1], len(positions_history_advanced)-1, SHOW_FRAME, )
