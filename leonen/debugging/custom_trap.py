@@ -11,7 +11,7 @@ import os
 os.makedirs('img', exist_ok=True)
 
 # Option to show frames or not show them
-SHOW_FRAME = True
+SHOW_FRAME = False
 
 idle_height = 5
 
@@ -68,7 +68,9 @@ colors = [data['color'] for node, data in trap.nodes(data=True)]
 # Example Usage
 positions_history_advanced = [
     [(1, 0, 0), (0, 1, idle_height), (0, 3, idle_height), (1, 4, idle_height), (3, 4, idle_height), (4, 3, idle_height), (4, 1, idle_height), (3, 0, idle_height)],  # Initial positions at t=0
-    [(1, 0, 0), (0, 1, 0), (0, 3, idle_height), (1, 4, idle_height), (3, 4, idle_height), (4, 3, idle_height), (4, 1, idle_height), (3, 0, idle_height)],  # Initial positions at t=0
+    [(1, 0, 0), (0, 1, 0), (0, 3, idle_height), (1, 4, idle_height), (3, 4, idle_height), (4, 3, idle_height), (4, 1, idle_height), (3, 0, idle_height)],  # Initial positions at t=1
+    [(1, 0, 0), (0, 1, 0), (0, 3, idle_height), (1, 4, idle_height), (3, 4, idle_height), (4, 3, idle_height), (4, 1, idle_height), (3, 0, idle_height)],  # Initial positions at t=2
+    [(1, 1, 0), (1, 1, 0), (0, 3, idle_height), (1, 4, idle_height), (3, 4, idle_height), (4, 3, idle_height), (4, 1, idle_height), (3, 0, idle_height)],  # Initial positions at t=3
 ]
 
 
@@ -144,7 +146,7 @@ def draw_current_state(last_state, list_nr, show_frame):
         plt.show()
 
 # example usage for only one frame
-draw_current_state(positions_history_advanced[-1], len(positions_history_advanced)-1, SHOW_FRAME)
+draw_current_state(positions_history_advanced[-1], len(positions_history_advanced)-1, SHOW_FRAME, )
 
 
 def animate_positions_history(positions_history, show_frames):
@@ -154,8 +156,9 @@ def animate_positions_history(positions_history, show_frames):
 
     # Create the frames
     frames = []
-    imgs = glob.glob("img/*.png")
+    imgs = sorted(glob.glob("img/*.png"))
     for i in imgs:
+        print(i)
         new_frame = Image.open(i)
         frames.append(new_frame)
 
