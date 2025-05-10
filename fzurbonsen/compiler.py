@@ -87,14 +87,6 @@ def apply_controlled_phase(control, target, angle):
     apply_rx_gate(target, -angle/2*n_)
     apply_ms_gate(control, target, -np.pi/4*n_)
 
-    # num_iterations = 2
-
-    # for i in range(num_iterations):
-    #     # Middle section with phase shifts and rotations
-    #     apply_ms_gate(control, target, np.pi/4 * n_ / (i + 1))  # Increase phase shift incrementally
-    #     apply_rx_gate(target, -angle/2 * n_ / (i + 1))  # Adjust angle iteratively
-    #     apply_ms_gate(control, target, -np.pi/4 * n_ / (i + 1))  # Apply inverse phase shift
-
     apply_ry_gate(control, np.pi/2)
     apply_ry_gate(target, np.pi/2*n_)
 
@@ -201,6 +193,8 @@ print(ms)
 
 # Create the trap graph
 graph = trap.create_trap_graph()
+
+print(gates_schedule)
 
 verifier.verifier(positions_history, gates_schedule, graph)
 
