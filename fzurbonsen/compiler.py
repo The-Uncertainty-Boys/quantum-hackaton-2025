@@ -5,13 +5,19 @@ import matplotlib.pyplot as plt
 import pennylane as qml
 from pennylane import numpy as np
 
+import QGate
+
 # Add the parent directory to the path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import trap  # Import trap module
 import verifier # Import verifier module
 
+
 n_qubits = 8
+gate_lists = [[] for _ in range(n_qubits)]
+gate_id = 0
+n_ms = 0
 
 n_ = 0.01
 
@@ -24,10 +30,28 @@ positions_history = []
 time_step = 0  # global time step tracker
 
 def add_to_schedule(gate_type, param, wires):
-    """Helper function to add gate to the current time step schedule."""
+    global gate_id 
+    global n_ms
+
     while len(gates_schedule) <= time_step:
         gates_schedule.append([])  # Ensure enough time slots
     gates_schedule[time_step].append((gate_type, param, wires))
+
+    if gate_type in ["RX", "RY"]:
+        gate_lists[wires].append(QGate.QGate(gate_id, gate_type, wires, theta=param))
+        gate_id += 1
+    elif gate_type == "MS":
+        w1, w2 = wires
+        gate_lists[w1].append(QGate.QGate(gate_id, gate_type, w1, w2, param))
+        gate_lists[w2].append(QGate.QGate(gate_id, gate_type, w2, w1, param))
+        gate_lists[w1][-1].ms_id = n_ms
+        gate_lists[w2][-1].ms_id = n_ms
+        n_ms += 1
+        gate_id += 1
+    else:
+        raise AssertionError(f"Invalid gate type {gate_type}!")
+
+
 
 def build_ms_gate(theta):
     I = np.eye(2)
@@ -38,24 +62,19 @@ def build_ms_gate(theta):
 def apply_ms_gate(wire1, wire2, theta):
     U = build_ms_gate(theta)
     qml.QubitUnitary(U, wires=[wire1, wire2])
-    print(f"MS, {theta/np.pi}*pi, [{wire1}, {wire2}]")
     add_to_schedule("MS", theta, (wire1, wire2))
 
 def apply_rx_gate(wire, theta):
     qml.RX(theta, wires=wire)
-    print(f"RX, {theta/np.pi}*pi, {wire}")
     add_to_schedule("RX", theta, wire)
 
 def apply_ry_gate(wire, theta):
     qml.RY(theta, wires=wire)
-    print(f"RY, {theta/np.pi}*pi, {wire}")
     add_to_schedule("RY", theta, wire)
 
 def apply_hadamard_approx(wire):
-    print("H:")
     apply_ry_gate(wire, np.pi/2)
     apply_rx_gate(wire, np.pi)
-    print("\n")
 
 def apply_isingXX_gate(control, target, theta):
     apply_ry_gate(target, -np.pi/2)
@@ -79,7 +98,6 @@ def apply_rz_approx(wire, theta):
     apply_ry_gate(wire, -np.pi/2)
 
 def apply_controlled_phase(control, target, angle):
-    print(f"P, {angle/np.pi}*pi, {target}, {control}")
     apply_ry_gate(control, -np.pi/2)
     apply_ry_gate(target, -np.pi/2*n_)
 
@@ -111,7 +129,6 @@ def apply_controlled_phase(control, target, angle):
     # apply_cnot_approx(control, target)
 
     # qml.ControlledPhaseShift(angle, wires=[control, target])
-    print("\n")
 
 @qml.qnode(dev0)
 def qft_circuit():
@@ -125,8 +142,7 @@ def qft_circuit():
         for control in range(target + 1, n_qubits):
             angle = np.pi/ (2 ** (control - target))
             apply_controlled_phase(control, target, angle)
-
-        time_step += 1
+            time_step += 1
     
     return qml.density_matrix(wires=range(n_qubits))
 
@@ -149,6 +165,49 @@ def print_gate_schedule(schedule):
             print("   → No gates applied")
     print()
 
+def print_adjacency_and_gates(adj_mat, gates):
+    print("Adjacency Matrix:")
+    for row in adj_mat:
+        print(" ".join(str(val) for val in row))
+
+    print("\nGates List:")
+    for gate in gates:
+        if gate is not None:
+            print(f"ID: {gate.id}, Type: {gate.type}, Qubit1: {gate.qubit1}, Qubit2: {gate.qubit2}, Theta: {gate.theta}")
+        else:
+            print("None")
+
+def topological_sort(adj_mat):
+    from collections import deque
+
+    n = len(adj_mat)
+    in_degree = [0] * n
+
+    # Compute in-degrees
+    for i in range(n):
+        for j in range(n):
+            if adj_mat[i][j] == 1:
+                in_degree[j] += 1
+
+    # Queue for nodes with in-degree 0
+    queue = deque([i for i in range(n) if in_degree[i] == 0])
+    topo_order = []
+
+    while queue:
+        node = queue.popleft()
+        topo_order.append(node)
+
+        for neighbor in range(n):
+            if adj_mat[node][neighbor] == 1:
+                in_degree[neighbor] -= 1
+                if in_degree[neighbor] == 0:
+                    queue.append(neighbor)
+
+    if len(topo_order) != n:
+        raise ValueError("Graph has a cycle! Topological sort not possible.")
+    
+    return topo_order
+
 
 # Run and get final state
 # state = qft_like_circuit()
@@ -166,11 +225,8 @@ np.set_printoptions(threshold=np.inf, linewidth=np.inf, precision=5, suppress=Tr
 
 
 # with open("qft_output.txt", "w") as f:
-#     f.write("State (Custom QFT Approx):\n")
-#     f.write(str(state) + "\n\n")
-    
-#     f.write("Bench (qml.QFT):\n")
-#     f.write(str(bench) + "\n\n")
+#     for gate in gates_schedule:
+#         f.write(str(gate) + "\n")
 
 np.set_printoptions(threshold=200, linewidth=200, precision=5, suppress=True)
     
@@ -185,16 +241,59 @@ print(f"Largest difference at index {max_diff_idx}:")
 print(f"state: {state[max_diff_idx]}")
 print(f"bench: {bench[max_diff_idx]}")
 
-ms = build_ms_gate(np.pi/4*n_)
-
-print(ms)
+# ms = build_ms_gate(np.pi/4*n_)
+# print(ms)
 
 # print_gate_schedule(gates_schedule)
 
 # Create the trap graph
 graph = trap.create_trap_graph()
 
-print(gates_schedule)
+
+adj_mat = [[0 for __ in range(gate_id)] for _ in range(gate_id)]
+gates = [None for _ in range(gate_id)]
+
+# store hierarchy in QGate struct
+for lst in gate_lists:
+    for i in range(len(lst)):
+        curr = lst[i]
+        if i > 0:
+            prev = lst[i - 1]
+            adj_mat[prev.id][curr.id] = 1  # prev → curr
+        if i < len(lst) - 1:
+            next_ = lst[i + 1]
+            adj_mat[curr.id][next_.id] = 1  # curr → next
+        gates[curr.id] = curr
+
+
+
+# print_adjacency_and_gates(adj_mat, gates)
+
+order = topological_sort(adj_mat)
+print("Topological order of gate IDs:", order)
+
+gates_schedule = [[] for _ in range(0, len(gates))]
+
+idx = 0
+for i in order:
+    gate = gates[i]
+    if gate.type in ["RX", "RY"]:
+        wires = [gate.qubit1]
+    else:
+        wires = [gate.qubit1, gate.qubit2]
+
+    print((gate.type, gate.theta, wires))
+
+    gates_schedule[idx].append((gate.type, gate.theta, wires))
+    idx += 1
+
+# print_gate_schedule(gates_schedule)
+
+with open("qft_output.txt", "w") as f:
+    for i in gates_schedule :
+        f.write(str(i) + "\n")
+
+        
 
 verifier.verifier(positions_history, gates_schedule, graph)
 
