@@ -11,7 +11,9 @@ import os
 os.makedirs('img', exist_ok=True)
 
 # Option to show frames or not show them
-SHOW_FRAME = False
+SHOW_FRAME = True
+
+idle_height = 5
 
 
 def create_trap_graph() -> nx.Graph:
@@ -31,48 +33,48 @@ def create_trap_graph() -> nx.Graph:
     interaction_nodes = [(1, 1), (1, 3), (3, 1), (3, 3), (1, 5), (3, 5)]
 
 
-    idle_height = 5
-
     for r in range(rows):
         for c in range(cols):
             base_node_id = (r, c)
 
             if base_node_id in interaction_nodes:
-                trap.add_node(base_node_id, type="interaction", color="red", xyz=[r,c,0])
+                trap.add_node(base_node_id, type="interaction", color="red", xyz=[r,c,0], cost=0.02)
             else:
-                trap.add_node(base_node_id, type="standard", color="blue",xyz=[r,c,0])
+                trap.add_node(base_node_id, type="standard", color="blue",xyz=[r,c,0], cost=0.02)
                 rest_node_id = (r, c, "idle")
-                trap.add_node(rest_node_id, type="idle", color="green", xyz=[r,c,idle_height])
-                trap.add_edge(base_node_id, rest_node_id)
+                trap.add_node(rest_node_id, type="idle", color="green", xyz=[r,c,idle_height], cost=0.01)
+                trap.add_edge(base_node_id, rest_node_id, cost=0.03)
 
     for r in range(rows):
         for c in range(cols):
             node_id = (r, c)
             if c + 1 < cols:
                 neighbor_id = (r, c + 1)
-                trap.add_edge(node_id, neighbor_id)
+                trap.add_edge(node_id, neighbor_id, cost=0.03)
             if r + 1 < rows:
                 neighbor_id = (r + 1, c)
-                trap.add_edge(node_id, neighbor_id)
+                trap.add_edge(node_id, neighbor_id, cost=0.03)
+
     return trap
 
 # create graph
 trap = create_trap_graph()
+
 
 # Extract node positions and colors
 pos = {node: data['xyz'] for node, data in trap.nodes(data=True)}
 colors = [data['color'] for node, data in trap.nodes(data=True)]
 
 # Example Usage
-positions_history = [
-    [(0, 0), (1, 0), (1, 0), (1, 2), (2, 0), (2, 1), (3, 0), (3, 1)],  # Initial positions at t=0
-    [(0, 0), (2, 1), (1, 2), (1, 1), (2, 0), (3, 1), (3, 1), (3, 1)],  # Qubit 2/3 moved to (1, 1)
-    [(3, 0), (4, 1), (1, 1), (3, 1), (2, 1), (2, 1), (3, 0), (3, 1)],  # No movement at t=2
+positions_history_advanced = [
+    [(1, 0, 0), (0, 1, idle_height), (0, 3, idle_height), (1, 4, idle_height), (3, 4, idle_height), (4, 3, idle_height), (4, 1, idle_height), (3, 0, idle_height)],  # Initial positions at t=0
+    [(1, 0, 0), (0, 1, 0), (0, 3, idle_height), (1, 4, idle_height), (3, 4, idle_height), (4, 3, idle_height), (4, 1, idle_height), (3, 0, idle_height)],  # Initial positions at t=0
 ]
 
 
 # DRAW the current state of the Penning Trap
 def draw_current_state(last_state, list_nr, show_frame):
+
 
     # initialize figure
     fig = plt.figure(figsize=(10, 8))
@@ -94,8 +96,9 @@ def draw_current_state(last_state, list_nr, show_frame):
     # count how many qubits are on the same node
     counts = Counter(last_state)
     for qubit_pos, count in counts.items():
-        if qubit_pos in pos:
-            x, y, z = pos[qubit_pos]
+        pos_values = [tuple(v) for v in pos.values()]
+        if qubit_pos in pos_values:
+            x, y, z = qubit_pos
             if count == 1:
                 # plot single qubits
                 ax.scatter(x, y, z, c='yellow', s=200, marker='*', edgecolors='k', label='1 Qubit')
@@ -104,7 +107,10 @@ def draw_current_state(last_state, list_nr, show_frame):
                 ax.scatter(x, y, z, c='magenta', s=300, marker='*', edgecolors='k', label='2 Qubits')
         else:
             # Handle idle nodes if needed
+            print("Error: position might be invalid")
             pass
+        
+
 
     # Only show one legend entry for each type
     handles, labels = ax.get_legend_handles_labels()
@@ -138,7 +144,8 @@ def draw_current_state(last_state, list_nr, show_frame):
         plt.show()
 
 # example usage for only one frame
-draw_current_state(positions_history[-1], len(positions_history)-1, SHOW_FRAME)
+draw_current_state(positions_history_advanced[-1], len(positions_history_advanced)-1, SHOW_FRAME)
+
 
 def animate_positions_history(positions_history, show_frames):
     for i in range(0, len(positions_history)):
@@ -160,4 +167,4 @@ def animate_positions_history(positions_history, show_frames):
 
 
 # example usage for whole animation
-animate_positions_history(positions_history, SHOW_FRAME)
+animate_positions_history(positions_history_advanced, SHOW_FRAME)
