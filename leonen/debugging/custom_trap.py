@@ -71,6 +71,7 @@ positions_history_advanced = [
     [(1, 0, 0), (0, 1, 0), (0, 3, idle_height), (1, 4, idle_height), (3, 4, idle_height), (4, 3, idle_height), (4, 1, idle_height), (3, 0, idle_height)],  # Initial positions at t=1
     [(1, 0, 0), (0, 1, 0), (0, 3, idle_height), (1, 4, idle_height), (3, 4, idle_height), (4, 3, idle_height), (4, 1, idle_height), (3, 0, idle_height)],  # Initial positions at t=2
     [(1, 1, 0), (1, 1, 0), (0, 3, idle_height), (1, 4, idle_height), (3, 4, idle_height), (4, 3, idle_height), (4, 1, idle_height), (3, 0, idle_height)],  # Initial positions at t=3
+
 ]
 
 
@@ -94,6 +95,23 @@ def draw_current_state(last_state, list_nr, show_frame):
         y = [pos[u][1], pos[v][1]]
         z = [pos[u][2], pos[v][2]]
         ax.plot(x, y, z, color='gray', alpha=0.6)
+
+            # After plotting actual qubit data...
+    # Add dummy points for legend if categories are missing
+    existing_labels = set(ax.get_legend_handles_labels()[1])  
+
+    if '1 Qubit' not in existing_labels:
+        ax.scatter([], [], c='yellow', s=200, marker='*', 
+                edgecolors='k', label='1 Qubit')
+    if '2 Qubits' not in existing_labels:
+        ax.scatter([], [], c='magenta', s=300, marker='*',
+                edgecolors='k', label='2 Qubits')
+
+    # Create legend with unique entries
+    handles, labels = ax.get_legend_handles_labels()
+    unique = {(h, l) for h, l in zip(handles, labels)}
+    ax.legend(*zip(*unique), loc='best')
+
 
     # count how many qubits are on the same node
     counts = Counter(last_state)
@@ -127,6 +145,7 @@ def draw_current_state(last_state, list_nr, show_frame):
     if unique_handles:
         ax.legend(unique_handles, unique_labels)
 
+
     # x and y label
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
@@ -138,7 +157,7 @@ def draw_current_state(last_state, list_nr, show_frame):
 
     ax.set_xticks(np.arange(0, 5, 1))  # For columns 0 to 6 (change 7 if your grid size changes)
 
-    plt.title("Penning Trap Graph (3D)")
+    plt.title("Penning Trap Graph (3D) - Frame " + str(list_nr))
     plt.tight_layout()
     plt.savefig('img/foo' + str(list_nr)+'.png')
 
@@ -158,7 +177,6 @@ def animate_positions_history(positions_history, show_frames):
     frames = []
     imgs = sorted(glob.glob("img/*.png"))
     for i in imgs:
-        print(i)
         new_frame = Image.open(i)
         frames.append(new_frame)
 
