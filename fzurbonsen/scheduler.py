@@ -18,19 +18,14 @@ class Ion:
         self.node = node
 
 i_node = (1,1)
+i_node_p = (1,0)
+i_node_n = (1,2)
 
 def get_pos(ions):
     pos = []
     for ion in ions:
         pos.append(ion.node)
     return pos
-
-def get_multiple_R(order, max, gates):
-    log = [0 for _ in range(max)]
-    for i in range(max):
-        k = order[i]
-        if gates[k].type in ["RY", "RX"]:
-            
         
 
 def scheduler(order, graph, gates):
@@ -73,8 +68,8 @@ def scheduler(order, graph, gates):
             x1, y1, z1 = ion1.node
             x2, y2, z2 = ion2.node
 
-            path1 = nx.shortest_path(graph, source=ion1.node, target=i_node)
-            path2 = nx.shortest_path(graph, source=ion2.node, target=i_node)
+            path1 = nx.shortest_path(graph, source=ion1.node, target=i_node_p)
+            path2 = nx.shortest_path(graph, source=ion2.node, target=i_node_n)
 
             for t in range(len(path1)):
                 node = path1[t]
@@ -90,9 +85,19 @@ def scheduler(order, graph, gates):
                 gates_schedule.append([])
                 time += 1
 
+            ion1.node = i_node
+            ion2.node = i_node
+            positions_history.append(get_pos(ions))
+            gates_schedule.append([])
+            time += 1
             positions_history.append(get_pos(ions))
             gates_schedule.append([(str(gate.type), gate.theta, [gate.qubit1, gate.qubit2])])
+            # time += 1
+            # positions_history.append(get_pos(ions))
+            # gates_schedule.append([])
             time += 1
+            ion1.node = i_node_p
+            ion2.node = i_node_n
             positions_history.append(get_pos(ions))
             gates_schedule.append([])
             time += 1
@@ -100,8 +105,8 @@ def scheduler(order, graph, gates):
             path1 = []
             path2 = []
 
-            path1 = nx.shortest_path(graph, source=i_node, target=(x1, y1, z1))
-            path2 = nx.shortest_path(graph, source=i_node, target=(x2, y2, z2))
+            path1 = nx.shortest_path(graph, source=i_node_p, target=(x1, y1, z1))
+            path2 = nx.shortest_path(graph, source=i_node_n, target=(x2, y2, z2))
 
             for t in range(len(path1)):
                 node = path1[t]
