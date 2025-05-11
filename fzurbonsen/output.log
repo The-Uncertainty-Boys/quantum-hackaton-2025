@@ -1,0 +1,629 @@
+outuput.log
+
+
+
+
+gates:id: 1, type: RX, qubit1: 0
+id: 2, type: RY, qubit1: 0
+id: 3, type: MS, qubit1: 0, qubit2: 1
+id: 4, type: RX, qubit1: 0
+id: 5, type: MS, qubit1: 0, qubit2: 1
+id: 6, type: MS, qubit1: 0, qubit2: 2
+id: 7, type: RX, qubit1: 0
+id: 8, type: MS, qubit1: 0, qubit2: 2
+id: 9, type: MS, qubit1: 0, qubit2: 3
+id: 10, type: RX, qubit1: 0
+id: 11, type: MS, qubit1: 0, qubit2: 3
+id: 12, type: MS, qubit1: 0, qubit2: 4
+id: 13, type: RX, qubit1: 0
+id: 14, type: MS, qubit1: 0, qubit2: 4
+id: 15, type: MS, qubit1: 0, qubit2: 5
+id: 16, type: RX, qubit1: 0
+id: 17, type: MS, qubit1: 0, qubit2: 5
+id: 18, type: MS, qubit1: 0, qubit2: 6
+id: 19, type: RX, qubit1: 0
+id: 20, type: MS, qubit1: 0, qubit2: 6
+id: 21, type: MS, qubit1: 0, qubit2: 7
+id: 22, type: RX, qubit1: 0
+id: 23, type: MS, qubit1: 0, qubit2: 7
+id: 24, type: RY, qubit1: 0
+id: 26, type: RY, qubit1: 1
+id: 27, type: RX, qubit1: 1
+id: 28, type: RY, qubit1: 1
+id: 29, type: MS, qubit1: 1, qubit2: 2
+id: 30, type: RX, qubit1: 1
+id: 31, type: MS, qubit1: 1, qubit2: 2
+id: 32, type: MS, qubit1: 1, qubit2: 3
+id: 33, type: RX, qubit1: 1
+id: 34, type: MS, qubit1: 1, qubit2: 3
+id: 35, type: MS, qubit1: 1, qubit2: 4
+id: 36, type: RX, qubit1: 1
+id: 37, type: MS, qubit1: 1, qubit2: 4
+id: 38, type: MS, qubit1: 1, qubit2: 5
+id: 39, type: RX, qubit1: 1
+id: 40, type: MS, qubit1: 1, qubit2: 5
+id: 41, type: MS, qubit1: 1, qubit2: 6
+id: 42, type: RX, qubit1: 1
+id: 43, type: MS, qubit1: 1, qubit2: 6
+id: 44, type: MS, qubit1: 1, qubit2: 7
+id: 45, type: RX, qubit1: 1
+id: 46, type: MS, qubit1: 1, qubit2: 7
+id: 47, type: RY, qubit1: 1
+id: 49, type: RY, qubit1: 2
+id: 50, type: RX, qubit1: 2
+id: 51, type: RY, qubit1: 2
+id: 52, type: MS, qubit1: 2, qubit2: 3
+id: 53, type: RX, qubit1: 2
+id: 54, type: MS, qubit1: 2, qubit2: 3
+id: 55, type: MS, qubit1: 2, qubit2: 4
+id: 56, type: RX, qubit1: 2
+id: 57, type: MS, qubit1: 2, qubit2: 4
+id: 58, type: MS, qubit1: 2, qubit2: 5
+id: 59, type: RX, qubit1: 2
+id: 60, type: MS, qubit1: 2, qubit2: 5
+id: 61, type: MS, qubit1: 2, qubit2: 6
+id: 62, type: RX, qubit1: 2
+id: 63, type: MS, qubit1: 2, qubit2: 6
+id: 64, type: MS, qubit1: 2, qubit2: 7
+id: 65, type: RX, qubit1: 2
+id: 66, type: MS, qubit1: 2, qubit2: 7
+id: 67, type: RY, qubit1: 2
+id: 69, type: RY, qubit1: 3
+id: 70, type: RX, qubit1: 3
+id: 71, type: RY, qubit1: 3
+id: 72, type: MS, qubit1: 3, qubit2: 4
+id: 73, type: RX, qubit1: 3
+id: 74, type: MS, qubit1: 3, qubit2: 4
+id: 75, type: MS, qubit1: 3, qubit2: 5
+id: 76, type: RX, qubit1: 3
+id: 77, type: MS, qubit1: 3, qubit2: 5
+id: 78, type: MS, qubit1: 3, qubit2: 6
+id: 79, type: RX, qubit1: 3
+id: 80, type: MS, qubit1: 3, qubit2: 6
+id: 81, type: MS, qubit1: 3, qubit2: 7
+id: 82, type: RX, qubit1: 3
+id: 83, type: MS, qubit1: 3, qubit2: 7
+id: 84, type: RY, qubit1: 3
+id: 86, type: RY, qubit1: 4
+id: 87, type: RX, qubit1: 4
+id: 88, type: RY, qubit1: 4
+id: 89, type: MS, qubit1: 4, qubit2: 5
+id: 90, type: RX, qubit1: 4
+id: 91, type: MS, qubit1: 4, qubit2: 5
+id: 92, type: MS, qubit1: 4, qubit2: 6
+id: 93, type: RX, qubit1: 4
+id: 94, type: MS, qubit1: 4, qubit2: 6
+id: 95, type: MS, qubit1: 4, qubit2: 7
+id: 96, type: RX, qubit1: 4
+id: 97, type: MS, qubit1: 4, qubit2: 7
+id: 98, type: RY, qubit1: 4
+id: 100, type: RY, qubit1: 5
+id: 101, type: RX, qubit1: 5
+id: 102, type: RY, qubit1: 5
+id: 103, type: MS, qubit1: 5, qubit2: 6
+id: 104, type: RX, qubit1: 5
+id: 105, type: MS, qubit1: 5, qubit2: 6
+id: 106, type: MS, qubit1: 5, qubit2: 7
+id: 107, type: RX, qubit1: 5
+id: 108, type: MS, qubit1: 5, qubit2: 7
+id: 109, type: RY, qubit1: 5
+id: 111, type: RY, qubit1: 6
+id: 112, type: RX, qubit1: 6
+id: 113, type: RY, qubit1: 6
+id: 114, type: MS, qubit1: 6, qubit2: 7
+id: 115, type: RX, qubit1: 6
+id: 116, type: MS, qubit1: 6, qubit2: 7
+id: 117, type: RY, qubit1: 6
+id: 119, type: RY, qubit1: 7
+id: 120, type: RX, qubit1: 7
+
+next_gates:
+active_gates:id: 0, type: RY, qubit1: 0
+id: 25, type: RY, qubit1: 1
+id: 48, type: RY, qubit1: 2
+id: 68, type: RY, qubit1: 3
+id: 85, type: RY, qubit1: 4
+id: 99, type: RY, qubit1: 5
+id: 110, type: RY, qubit1: 6
+id: 118, type: RY, qubit1: 7
+
+
+
+
+
+
+gates:id: 1, type: RX, qubit1: 0
+id: 2, type: RY, qubit1: 0
+id: 3, type: MS, qubit1: 0, qubit2: 1
+id: 4, type: RX, qubit1: 0
+id: 5, type: MS, qubit1: 0, qubit2: 1
+id: 6, type: MS, qubit1: 0, qubit2: 2
+id: 7, type: RX, qubit1: 0
+id: 8, type: MS, qubit1: 0, qubit2: 2
+id: 9, type: MS, qubit1: 0, qubit2: 3
+id: 10, type: RX, qubit1: 0
+id: 11, type: MS, qubit1: 0, qubit2: 3
+id: 12, type: MS, qubit1: 0, qubit2: 4
+id: 13, type: RX, qubit1: 0
+id: 14, type: MS, qubit1: 0, qubit2: 4
+id: 15, type: MS, qubit1: 0, qubit2: 5
+id: 16, type: RX, qubit1: 0
+id: 17, type: MS, qubit1: 0, qubit2: 5
+id: 18, type: MS, qubit1: 0, qubit2: 6
+id: 19, type: RX, qubit1: 0
+id: 20, type: MS, qubit1: 0, qubit2: 6
+id: 21, type: MS, qubit1: 0, qubit2: 7
+id: 22, type: RX, qubit1: 0
+id: 23, type: MS, qubit1: 0, qubit2: 7
+id: 24, type: RY, qubit1: 0
+id: 26, type: RY, qubit1: 1
+id: 27, type: RX, qubit1: 1
+id: 28, type: RY, qubit1: 1
+id: 29, type: MS, qubit1: 1, qubit2: 2
+id: 30, type: RX, qubit1: 1
+id: 31, type: MS, qubit1: 1, qubit2: 2
+id: 32, type: MS, qubit1: 1, qubit2: 3
+id: 33, type: RX, qubit1: 1
+id: 34, type: MS, qubit1: 1, qubit2: 3
+id: 35, type: MS, qubit1: 1, qubit2: 4
+id: 36, type: RX, qubit1: 1
+id: 37, type: MS, qubit1: 1, qubit2: 4
+id: 38, type: MS, qubit1: 1, qubit2: 5
+id: 39, type: RX, qubit1: 1
+id: 40, type: MS, qubit1: 1, qubit2: 5
+id: 41, type: MS, qubit1: 1, qubit2: 6
+id: 42, type: RX, qubit1: 1
+id: 43, type: MS, qubit1: 1, qubit2: 6
+id: 44, type: MS, qubit1: 1, qubit2: 7
+id: 45, type: RX, qubit1: 1
+id: 46, type: MS, qubit1: 1, qubit2: 7
+id: 47, type: RY, qubit1: 1
+id: 49, type: RY, qubit1: 2
+id: 50, type: RX, qubit1: 2
+id: 51, type: RY, qubit1: 2
+id: 52, type: MS, qubit1: 2, qubit2: 3
+id: 53, type: RX, qubit1: 2
+id: 54, type: MS, qubit1: 2, qubit2: 3
+id: 55, type: MS, qubit1: 2, qubit2: 4
+id: 56, type: RX, qubit1: 2
+id: 57, type: MS, qubit1: 2, qubit2: 4
+id: 58, type: MS, qubit1: 2, qubit2: 5
+id: 59, type: RX, qubit1: 2
+id: 60, type: MS, qubit1: 2, qubit2: 5
+id: 61, type: MS, qubit1: 2, qubit2: 6
+id: 62, type: RX, qubit1: 2
+id: 63, type: MS, qubit1: 2, qubit2: 6
+id: 64, type: MS, qubit1: 2, qubit2: 7
+id: 65, type: RX, qubit1: 2
+id: 66, type: MS, qubit1: 2, qubit2: 7
+id: 67, type: RY, qubit1: 2
+id: 69, type: RY, qubit1: 3
+id: 70, type: RX, qubit1: 3
+id: 71, type: RY, qubit1: 3
+id: 72, type: MS, qubit1: 3, qubit2: 4
+id: 73, type: RX, qubit1: 3
+id: 74, type: MS, qubit1: 3, qubit2: 4
+id: 75, type: MS, qubit1: 3, qubit2: 5
+id: 76, type: RX, qubit1: 3
+id: 77, type: MS, qubit1: 3, qubit2: 5
+id: 78, type: MS, qubit1: 3, qubit2: 6
+id: 79, type: RX, qubit1: 3
+id: 80, type: MS, qubit1: 3, qubit2: 6
+id: 81, type: MS, qubit1: 3, qubit2: 7
+id: 82, type: RX, qubit1: 3
+id: 83, type: MS, qubit1: 3, qubit2: 7
+id: 84, type: RY, qubit1: 3
+id: 86, type: RY, qubit1: 4
+id: 87, type: RX, qubit1: 4
+id: 88, type: RY, qubit1: 4
+id: 89, type: MS, qubit1: 4, qubit2: 5
+id: 90, type: RX, qubit1: 4
+id: 91, type: MS, qubit1: 4, qubit2: 5
+id: 92, type: MS, qubit1: 4, qubit2: 6
+id: 93, type: RX, qubit1: 4
+id: 94, type: MS, qubit1: 4, qubit2: 6
+id: 95, type: MS, qubit1: 4, qubit2: 7
+id: 96, type: RX, qubit1: 4
+id: 97, type: MS, qubit1: 4, qubit2: 7
+id: 98, type: RY, qubit1: 4
+id: 100, type: RY, qubit1: 5
+id: 101, type: RX, qubit1: 5
+id: 102, type: RY, qubit1: 5
+id: 103, type: MS, qubit1: 5, qubit2: 6
+id: 104, type: RX, qubit1: 5
+id: 105, type: MS, qubit1: 5, qubit2: 6
+id: 106, type: MS, qubit1: 5, qubit2: 7
+id: 107, type: RX, qubit1: 5
+id: 108, type: MS, qubit1: 5, qubit2: 7
+id: 109, type: RY, qubit1: 5
+id: 111, type: RY, qubit1: 6
+id: 112, type: RX, qubit1: 6
+id: 113, type: RY, qubit1: 6
+id: 114, type: MS, qubit1: 6, qubit2: 7
+id: 115, type: RX, qubit1: 6
+id: 116, type: MS, qubit1: 6, qubit2: 7
+id: 117, type: RY, qubit1: 6
+id: 119, type: RY, qubit1: 7
+id: 120, type: RX, qubit1: 7
+
+next_gates:
+active_gates:id: 0, type: RY, qubit1: 0
+id: 25, type: RY, qubit1: 1
+id: 48, type: RY, qubit1: 2
+id: 68, type: RY, qubit1: 3
+id: 85, type: RY, qubit1: 4
+id: 99, type: RY, qubit1: 5
+id: 110, type: RY, qubit1: 6
+id: 118, type: RY, qubit1: 7
+
+
+
+
+
+
+gates:id: 1, type: RX, qubit1: 0
+id: 2, type: RY, qubit1: 0
+id: 3, type: MS, qubit1: 0, qubit2: 1
+id: 4, type: RX, qubit1: 0
+id: 5, type: MS, qubit1: 0, qubit2: 1
+id: 6, type: MS, qubit1: 0, qubit2: 2
+id: 7, type: RX, qubit1: 0
+id: 8, type: MS, qubit1: 0, qubit2: 2
+id: 9, type: MS, qubit1: 0, qubit2: 3
+id: 10, type: RX, qubit1: 0
+id: 11, type: MS, qubit1: 0, qubit2: 3
+id: 12, type: MS, qubit1: 0, qubit2: 4
+id: 13, type: RX, qubit1: 0
+id: 14, type: MS, qubit1: 0, qubit2: 4
+id: 15, type: MS, qubit1: 0, qubit2: 5
+id: 16, type: RX, qubit1: 0
+id: 17, type: MS, qubit1: 0, qubit2: 5
+id: 18, type: MS, qubit1: 0, qubit2: 6
+id: 19, type: RX, qubit1: 0
+id: 20, type: MS, qubit1: 0, qubit2: 6
+id: 21, type: MS, qubit1: 0, qubit2: 7
+id: 22, type: RX, qubit1: 0
+id: 23, type: MS, qubit1: 0, qubit2: 7
+id: 24, type: RY, qubit1: 0
+id: 26, type: RY, qubit1: 1
+id: 27, type: RX, qubit1: 1
+id: 28, type: RY, qubit1: 1
+id: 29, type: MS, qubit1: 1, qubit2: 2
+id: 30, type: RX, qubit1: 1
+id: 31, type: MS, qubit1: 1, qubit2: 2
+id: 32, type: MS, qubit1: 1, qubit2: 3
+id: 33, type: RX, qubit1: 1
+id: 34, type: MS, qubit1: 1, qubit2: 3
+id: 35, type: MS, qubit1: 1, qubit2: 4
+id: 36, type: RX, qubit1: 1
+id: 37, type: MS, qubit1: 1, qubit2: 4
+id: 38, type: MS, qubit1: 1, qubit2: 5
+id: 39, type: RX, qubit1: 1
+id: 40, type: MS, qubit1: 1, qubit2: 5
+id: 41, type: MS, qubit1: 1, qubit2: 6
+id: 42, type: RX, qubit1: 1
+id: 43, type: MS, qubit1: 1, qubit2: 6
+id: 44, type: MS, qubit1: 1, qubit2: 7
+id: 45, type: RX, qubit1: 1
+id: 46, type: MS, qubit1: 1, qubit2: 7
+id: 47, type: RY, qubit1: 1
+id: 49, type: RY, qubit1: 2
+id: 50, type: RX, qubit1: 2
+id: 51, type: RY, qubit1: 2
+id: 52, type: MS, qubit1: 2, qubit2: 3
+id: 53, type: RX, qubit1: 2
+id: 54, type: MS, qubit1: 2, qubit2: 3
+id: 55, type: MS, qubit1: 2, qubit2: 4
+id: 56, type: RX, qubit1: 2
+id: 57, type: MS, qubit1: 2, qubit2: 4
+id: 58, type: MS, qubit1: 2, qubit2: 5
+id: 59, type: RX, qubit1: 2
+id: 60, type: MS, qubit1: 2, qubit2: 5
+id: 61, type: MS, qubit1: 2, qubit2: 6
+id: 62, type: RX, qubit1: 2
+id: 63, type: MS, qubit1: 2, qubit2: 6
+id: 64, type: MS, qubit1: 2, qubit2: 7
+id: 65, type: RX, qubit1: 2
+id: 66, type: MS, qubit1: 2, qubit2: 7
+id: 67, type: RY, qubit1: 2
+id: 69, type: RY, qubit1: 3
+id: 70, type: RX, qubit1: 3
+id: 71, type: RY, qubit1: 3
+id: 72, type: MS, qubit1: 3, qubit2: 4
+id: 73, type: RX, qubit1: 3
+id: 74, type: MS, qubit1: 3, qubit2: 4
+id: 75, type: MS, qubit1: 3, qubit2: 5
+id: 76, type: RX, qubit1: 3
+id: 77, type: MS, qubit1: 3, qubit2: 5
+id: 78, type: MS, qubit1: 3, qubit2: 6
+id: 79, type: RX, qubit1: 3
+id: 80, type: MS, qubit1: 3, qubit2: 6
+id: 81, type: MS, qubit1: 3, qubit2: 7
+id: 82, type: RX, qubit1: 3
+id: 83, type: MS, qubit1: 3, qubit2: 7
+id: 84, type: RY, qubit1: 3
+id: 86, type: RY, qubit1: 4
+id: 87, type: RX, qubit1: 4
+id: 88, type: RY, qubit1: 4
+id: 89, type: MS, qubit1: 4, qubit2: 5
+id: 90, type: RX, qubit1: 4
+id: 91, type: MS, qubit1: 4, qubit2: 5
+id: 92, type: MS, qubit1: 4, qubit2: 6
+id: 93, type: RX, qubit1: 4
+id: 94, type: MS, qubit1: 4, qubit2: 6
+id: 95, type: MS, qubit1: 4, qubit2: 7
+id: 96, type: RX, qubit1: 4
+id: 97, type: MS, qubit1: 4, qubit2: 7
+id: 98, type: RY, qubit1: 4
+id: 100, type: RY, qubit1: 5
+id: 101, type: RX, qubit1: 5
+id: 102, type: RY, qubit1: 5
+id: 103, type: MS, qubit1: 5, qubit2: 6
+id: 104, type: RX, qubit1: 5
+id: 105, type: MS, qubit1: 5, qubit2: 6
+id: 106, type: MS, qubit1: 5, qubit2: 7
+id: 107, type: RX, qubit1: 5
+id: 108, type: MS, qubit1: 5, qubit2: 7
+id: 109, type: RY, qubit1: 5
+id: 111, type: RY, qubit1: 6
+id: 112, type: RX, qubit1: 6
+id: 113, type: RY, qubit1: 6
+id: 114, type: MS, qubit1: 6, qubit2: 7
+id: 115, type: RX, qubit1: 6
+id: 116, type: MS, qubit1: 6, qubit2: 7
+id: 117, type: RY, qubit1: 6
+id: 119, type: RY, qubit1: 7
+id: 120, type: RX, qubit1: 7
+
+next_gates:
+active_gates:id: 25, type: RY, qubit1: 1
+id: 68, type: RY, qubit1: 3
+id: 99, type: RY, qubit1: 5
+id: 118, type: RY, qubit1: 7
+
+
+
+
+
+
+gates:id: 1, type: RX, qubit1: 0
+id: 2, type: RY, qubit1: 0
+id: 3, type: MS, qubit1: 0, qubit2: 1
+id: 4, type: RX, qubit1: 0
+id: 5, type: MS, qubit1: 0, qubit2: 1
+id: 6, type: MS, qubit1: 0, qubit2: 2
+id: 7, type: RX, qubit1: 0
+id: 8, type: MS, qubit1: 0, qubit2: 2
+id: 9, type: MS, qubit1: 0, qubit2: 3
+id: 10, type: RX, qubit1: 0
+id: 11, type: MS, qubit1: 0, qubit2: 3
+id: 12, type: MS, qubit1: 0, qubit2: 4
+id: 13, type: RX, qubit1: 0
+id: 14, type: MS, qubit1: 0, qubit2: 4
+id: 15, type: MS, qubit1: 0, qubit2: 5
+id: 16, type: RX, qubit1: 0
+id: 17, type: MS, qubit1: 0, qubit2: 5
+id: 18, type: MS, qubit1: 0, qubit2: 6
+id: 19, type: RX, qubit1: 0
+id: 20, type: MS, qubit1: 0, qubit2: 6
+id: 21, type: MS, qubit1: 0, qubit2: 7
+id: 22, type: RX, qubit1: 0
+id: 23, type: MS, qubit1: 0, qubit2: 7
+id: 24, type: RY, qubit1: 0
+id: 26, type: RY, qubit1: 1
+id: 27, type: RX, qubit1: 1
+id: 28, type: RY, qubit1: 1
+id: 29, type: MS, qubit1: 1, qubit2: 2
+id: 30, type: RX, qubit1: 1
+id: 31, type: MS, qubit1: 1, qubit2: 2
+id: 32, type: MS, qubit1: 1, qubit2: 3
+id: 33, type: RX, qubit1: 1
+id: 34, type: MS, qubit1: 1, qubit2: 3
+id: 35, type: MS, qubit1: 1, qubit2: 4
+id: 36, type: RX, qubit1: 1
+id: 37, type: MS, qubit1: 1, qubit2: 4
+id: 38, type: MS, qubit1: 1, qubit2: 5
+id: 39, type: RX, qubit1: 1
+id: 40, type: MS, qubit1: 1, qubit2: 5
+id: 41, type: MS, qubit1: 1, qubit2: 6
+id: 42, type: RX, qubit1: 1
+id: 43, type: MS, qubit1: 1, qubit2: 6
+id: 44, type: MS, qubit1: 1, qubit2: 7
+id: 45, type: RX, qubit1: 1
+id: 46, type: MS, qubit1: 1, qubit2: 7
+id: 47, type: RY, qubit1: 1
+id: 49, type: RY, qubit1: 2
+id: 50, type: RX, qubit1: 2
+id: 51, type: RY, qubit1: 2
+id: 52, type: MS, qubit1: 2, qubit2: 3
+id: 53, type: RX, qubit1: 2
+id: 54, type: MS, qubit1: 2, qubit2: 3
+id: 55, type: MS, qubit1: 2, qubit2: 4
+id: 56, type: RX, qubit1: 2
+id: 57, type: MS, qubit1: 2, qubit2: 4
+id: 58, type: MS, qubit1: 2, qubit2: 5
+id: 59, type: RX, qubit1: 2
+id: 60, type: MS, qubit1: 2, qubit2: 5
+id: 61, type: MS, qubit1: 2, qubit2: 6
+id: 62, type: RX, qubit1: 2
+id: 63, type: MS, qubit1: 2, qubit2: 6
+id: 64, type: MS, qubit1: 2, qubit2: 7
+id: 65, type: RX, qubit1: 2
+id: 66, type: MS, qubit1: 2, qubit2: 7
+id: 67, type: RY, qubit1: 2
+id: 69, type: RY, qubit1: 3
+id: 70, type: RX, qubit1: 3
+id: 71, type: RY, qubit1: 3
+id: 72, type: MS, qubit1: 3, qubit2: 4
+id: 73, type: RX, qubit1: 3
+id: 74, type: MS, qubit1: 3, qubit2: 4
+id: 75, type: MS, qubit1: 3, qubit2: 5
+id: 76, type: RX, qubit1: 3
+id: 77, type: MS, qubit1: 3, qubit2: 5
+id: 78, type: MS, qubit1: 3, qubit2: 6
+id: 79, type: RX, qubit1: 3
+id: 80, type: MS, qubit1: 3, qubit2: 6
+id: 81, type: MS, qubit1: 3, qubit2: 7
+id: 82, type: RX, qubit1: 3
+id: 83, type: MS, qubit1: 3, qubit2: 7
+id: 84, type: RY, qubit1: 3
+id: 86, type: RY, qubit1: 4
+id: 87, type: RX, qubit1: 4
+id: 88, type: RY, qubit1: 4
+id: 89, type: MS, qubit1: 4, qubit2: 5
+id: 90, type: RX, qubit1: 4
+id: 91, type: MS, qubit1: 4, qubit2: 5
+id: 92, type: MS, qubit1: 4, qubit2: 6
+id: 93, type: RX, qubit1: 4
+id: 94, type: MS, qubit1: 4, qubit2: 6
+id: 95, type: MS, qubit1: 4, qubit2: 7
+id: 96, type: RX, qubit1: 4
+id: 97, type: MS, qubit1: 4, qubit2: 7
+id: 98, type: RY, qubit1: 4
+id: 100, type: RY, qubit1: 5
+id: 101, type: RX, qubit1: 5
+id: 102, type: RY, qubit1: 5
+id: 103, type: MS, qubit1: 5, qubit2: 6
+id: 104, type: RX, qubit1: 5
+id: 105, type: MS, qubit1: 5, qubit2: 6
+id: 106, type: MS, qubit1: 5, qubit2: 7
+id: 107, type: RX, qubit1: 5
+id: 108, type: MS, qubit1: 5, qubit2: 7
+id: 109, type: RY, qubit1: 5
+id: 111, type: RY, qubit1: 6
+id: 112, type: RX, qubit1: 6
+id: 113, type: RY, qubit1: 6
+id: 114, type: MS, qubit1: 6, qubit2: 7
+id: 115, type: RX, qubit1: 6
+id: 116, type: MS, qubit1: 6, qubit2: 7
+id: 117, type: RY, qubit1: 6
+id: 119, type: RY, qubit1: 7
+id: 120, type: RX, qubit1: 7
+
+next_gates:
+active_gates:id: 68, type: RY, qubit1: 3
+id: 118, type: RY, qubit1: 7
+
+
+
+
+
+
+gates:id: 1, type: RX, qubit1: 0
+id: 2, type: RY, qubit1: 0
+id: 3, type: MS, qubit1: 0, qubit2: 1
+id: 4, type: RX, qubit1: 0
+id: 5, type: MS, qubit1: 0, qubit2: 1
+id: 6, type: MS, qubit1: 0, qubit2: 2
+id: 7, type: RX, qubit1: 0
+id: 8, type: MS, qubit1: 0, qubit2: 2
+id: 9, type: MS, qubit1: 0, qubit2: 3
+id: 10, type: RX, qubit1: 0
+id: 11, type: MS, qubit1: 0, qubit2: 3
+id: 12, type: MS, qubit1: 0, qubit2: 4
+id: 13, type: RX, qubit1: 0
+id: 14, type: MS, qubit1: 0, qubit2: 4
+id: 15, type: MS, qubit1: 0, qubit2: 5
+id: 16, type: RX, qubit1: 0
+id: 17, type: MS, qubit1: 0, qubit2: 5
+id: 18, type: MS, qubit1: 0, qubit2: 6
+id: 19, type: RX, qubit1: 0
+id: 20, type: MS, qubit1: 0, qubit2: 6
+id: 21, type: MS, qubit1: 0, qubit2: 7
+id: 22, type: RX, qubit1: 0
+id: 23, type: MS, qubit1: 0, qubit2: 7
+id: 24, type: RY, qubit1: 0
+id: 26, type: RY, qubit1: 1
+id: 27, type: RX, qubit1: 1
+id: 28, type: RY, qubit1: 1
+id: 29, type: MS, qubit1: 1, qubit2: 2
+id: 30, type: RX, qubit1: 1
+id: 31, type: MS, qubit1: 1, qubit2: 2
+id: 32, type: MS, qubit1: 1, qubit2: 3
+id: 33, type: RX, qubit1: 1
+id: 34, type: MS, qubit1: 1, qubit2: 3
+id: 35, type: MS, qubit1: 1, qubit2: 4
+id: 36, type: RX, qubit1: 1
+id: 37, type: MS, qubit1: 1, qubit2: 4
+id: 38, type: MS, qubit1: 1, qubit2: 5
+id: 39, type: RX, qubit1: 1
+id: 40, type: MS, qubit1: 1, qubit2: 5
+id: 41, type: MS, qubit1: 1, qubit2: 6
+id: 42, type: RX, qubit1: 1
+id: 43, type: MS, qubit1: 1, qubit2: 6
+id: 44, type: MS, qubit1: 1, qubit2: 7
+id: 45, type: RX, qubit1: 1
+id: 46, type: MS, qubit1: 1, qubit2: 7
+id: 47, type: RY, qubit1: 1
+id: 49, type: RY, qubit1: 2
+id: 50, type: RX, qubit1: 2
+id: 51, type: RY, qubit1: 2
+id: 52, type: MS, qubit1: 2, qubit2: 3
+id: 53, type: RX, qubit1: 2
+id: 54, type: MS, qubit1: 2, qubit2: 3
+id: 55, type: MS, qubit1: 2, qubit2: 4
+id: 56, type: RX, qubit1: 2
+id: 57, type: MS, qubit1: 2, qubit2: 4
+id: 58, type: MS, qubit1: 2, qubit2: 5
+id: 59, type: RX, qubit1: 2
+id: 60, type: MS, qubit1: 2, qubit2: 5
+id: 61, type: MS, qubit1: 2, qubit2: 6
+id: 62, type: RX, qubit1: 2
+id: 63, type: MS, qubit1: 2, qubit2: 6
+id: 64, type: MS, qubit1: 2, qubit2: 7
+id: 65, type: RX, qubit1: 2
+id: 66, type: MS, qubit1: 2, qubit2: 7
+id: 67, type: RY, qubit1: 2
+id: 69, type: RY, qubit1: 3
+id: 70, type: RX, qubit1: 3
+id: 71, type: RY, qubit1: 3
+id: 72, type: MS, qubit1: 3, qubit2: 4
+id: 73, type: RX, qubit1: 3
+id: 74, type: MS, qubit1: 3, qubit2: 4
+id: 75, type: MS, qubit1: 3, qubit2: 5
+id: 76, type: RX, qubit1: 3
+id: 77, type: MS, qubit1: 3, qubit2: 5
+id: 78, type: MS, qubit1: 3, qubit2: 6
+id: 79, type: RX, qubit1: 3
+id: 80, type: MS, qubit1: 3, qubit2: 6
+id: 81, type: MS, qubit1: 3, qubit2: 7
+id: 82, type: RX, qubit1: 3
+id: 83, type: MS, qubit1: 3, qubit2: 7
+id: 84, type: RY, qubit1: 3
+id: 86, type: RY, qubit1: 4
+id: 87, type: RX, qubit1: 4
+id: 88, type: RY, qubit1: 4
+id: 89, type: MS, qubit1: 4, qubit2: 5
+id: 90, type: RX, qubit1: 4
+id: 91, type: MS, qubit1: 4, qubit2: 5
+id: 92, type: MS, qubit1: 4, qubit2: 6
+id: 93, type: RX, qubit1: 4
+id: 94, type: MS, qubit1: 4, qubit2: 6
+id: 95, type: MS, qubit1: 4, qubit2: 7
+id: 96, type: RX, qubit1: 4
+id: 97, type: MS, qubit1: 4, qubit2: 7
+id: 98, type: RY, qubit1: 4
+id: 100, type: RY, qubit1: 5
+id: 101, type: RX, qubit1: 5
+id: 102, type: RY, qubit1: 5
+id: 103, type: MS, qubit1: 5, qubit2: 6
+id: 104, type: RX, qubit1: 5
+id: 105, type: MS, qubit1: 5, qubit2: 6
+id: 106, type: MS, qubit1: 5, qubit2: 7
+id: 107, type: RX, qubit1: 5
+id: 108, type: MS, qubit1: 5, qubit2: 7
+id: 109, type: RY, qubit1: 5
+id: 111, type: RY, qubit1: 6
+id: 112, type: RX, qubit1: 6
+id: 113, type: RY, qubit1: 6
+id: 114, type: MS, qubit1: 6, qubit2: 7
+id: 115, type: RX, qubit1: 6
+id: 116, type: MS, qubit1: 6, qubit2: 7
+id: 117, type: RY, qubit1: 6
+id: 119, type: RY, qubit1: 7
+id: 120, type: RX, qubit1: 7
+
+next_gates:
+active_gates:id: 118, type: RY, qubit1: 7
+
+

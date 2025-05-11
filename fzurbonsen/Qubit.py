@@ -9,6 +9,7 @@ class Qubit:
         self.free = 1
         self.idle = 0
         self.path = []
+        self.processing = 0
 
     def next_tick(self):
         self.free = 1
@@ -48,6 +49,18 @@ class Qubit:
             if (i, j-k, "idle") in self.graph and (i, j-k, "idle") not in pos:
                 return (i, j-k)
         raise AssertionError("error while searching for idle, none available")
+    
+    def find_next_free_interaction_node(self, free_interaction_nodes):
+        i, j = self.node
+        best = None
+        min_dist = float('inf')
+        
+        for x, y in free_interaction_nodes:
+            dist = abs(x - i) + abs(y - j)
+            if dist < min_dist:
+                best = (x, y)
+                min_dist = dist
+        return best
 
     def find_path_to_idle(self, pos):
         i, j = self.find_next_idle(pos)
@@ -55,6 +68,9 @@ class Qubit:
         return path
     
     def move(self, end, pos):
+        print(self.node)
+        print(end)
+        print(pos)
         # check if end is in the graph
         if end in self.graph and self.free:
             # check if the move is allowed
@@ -73,6 +89,22 @@ class Qubit:
                     self.free = 0
                     return pos
         return None # the move is not legal so we return None to indicate that
+    
+    def move_to_free(self, pos):
+        i, j = self.node
+        new_pos = self.move((i+1,j), pos)
+        if new_pos:
+            return new_pos
+        new_pos = self.move((i-1,j), pos)
+        if new_pos:
+            return new_pos
+        new_pos = self.move((i,j+1), pos)
+        if new_pos:
+            return new_pos
+        new_pos = self.move((i,j-1), pos)
+        if new_pos:
+            return new_pos
+        return None
         
     def find_path(self, end):
         global interaction_nodes

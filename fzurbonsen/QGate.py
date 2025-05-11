@@ -8,6 +8,7 @@ class QGate:
         self.done = 0
         self.next = []
         self.prev = []
+        self.time_index = 0
 
         if type == "RX" or type == "RY":
             self.qubit1 = qubit1

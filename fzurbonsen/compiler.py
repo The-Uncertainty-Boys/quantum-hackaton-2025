@@ -7,6 +7,7 @@ from pennylane import numpy as np
 
 import QGate
 import router
+import scheduler
 
 # Add the parent directory to the path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -266,7 +267,7 @@ for lst_idx, lst in enumerate(gate_lists):
             gate_lists_new[lst_idx].append(merged_gate)
             gate_idx += 1
 
-        i = j  # move to the next non-merged gate
+        i = j  # move to the next non-merged gate            
 
 gate_lists = []
 
@@ -282,16 +283,21 @@ for lst in gate_lists_new:
         if i > 0:
             prev = lst[i - 1]
             adj_mat[prev.id][curr.id] = 1  # prev → curr
-            if prev not in curr.prev:
-                curr.prev.append(prev)
         if i < len(lst) - 1:
             next_ = lst[i + 1]
             adj_mat[curr.id][next_.id] = 1  # curr → next
-            if next_ not in curr.next:
-                curr.next.append(next_)
         gates[curr.id] = curr
 
+# iterate over the adjacency matrix to regain the states
+for src_id in range(len(adj_mat)):
+    for dst_id in range(len(adj_mat[src_id])):
+        if adj_mat[src_id][dst_id] == 1:
+            gates[src_id].next.append(gates[dst_id])
+            gates[dst_id].prev.append(gates[src_id])
 
+for gate in gates:
+    if gate.type == "RY":
+        print(len(gate.prev))
 
 # print_adjacency_and_gates(adj_mat, gates)
 
@@ -320,7 +326,18 @@ with open("qft_output.txt", "w") as f:
         f.write(str(i) + "\n")
 
 graph = trap.create_trap_graph()
-router.router(gates, order, adj_mat, graph)
+# router.router(gates, order, adj_mat, graph)
+
+positions_history, gates_schedule = scheduler.scheduler(order, graph, gates)
+
+with open("output.txt", "w") as f:
+    for k in positions_history:
+        f.write(str(k))
+        f.write("\n")
+    f.write("\n")
+    for k in gates_schedule:
+        f.write(str(k))
+        f.write("\n")
 
 
 verifier.verifier(positions_history, gates_schedule, graph)
