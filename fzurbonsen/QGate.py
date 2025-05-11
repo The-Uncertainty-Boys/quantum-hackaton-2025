@@ -6,8 +6,8 @@ class QGate:
         self.ms_id = -1
         self.theta = theta
         self.done = 0
-        self.next = [None]
-        self.prev = [None]
+        self.next = []
+        self.prev = []
 
         if type == "RX" or type == "RY":
             self.qubit1 = qubit1

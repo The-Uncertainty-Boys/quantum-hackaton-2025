@@ -6,6 +6,7 @@ import pennylane as qml
 from pennylane import numpy as np
 
 import QGate
+import router
 
 # Add the parent directory to the path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -241,14 +242,6 @@ print(f"Largest difference at index {max_diff_idx}:")
 print(f"state: {state[max_diff_idx]}")
 print(f"bench: {bench[max_diff_idx]}")
 
-# ms = build_ms_gate(np.pi/4*n_)
-# print(ms)
-
-# print_gate_schedule(gates_schedule)
-
-# Create the trap graph
-graph = trap.create_trap_graph()
-
 # remove redundant gates
 gate_idx = 0
 gate_lists_new = [[] for _ in range(n_qubits)]
@@ -289,9 +282,13 @@ for lst in gate_lists_new:
         if i > 0:
             prev = lst[i - 1]
             adj_mat[prev.id][curr.id] = 1  # prev → curr
+            if prev not in curr.prev:
+                curr.prev.append(prev)
         if i < len(lst) - 1:
             next_ = lst[i + 1]
             adj_mat[curr.id][next_.id] = 1  # curr → next
+            if next_ not in curr.next:
+                curr.next.append(next_)
         gates[curr.id] = curr
 
 
@@ -321,6 +318,9 @@ for i in order:
 with open("qft_output.txt", "w") as f:
     for i in gates_schedule :
         f.write(str(i) + "\n")
+
+graph = trap.create_trap_graph()
+router.router(gates, order, adj_mat, graph)
 
 
 verifier.verifier(positions_history, gates_schedule, graph)
