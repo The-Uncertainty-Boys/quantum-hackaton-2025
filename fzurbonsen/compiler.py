@@ -330,11 +330,12 @@ graph = trap.create_trap_graph()
 
 positions_history, gates_schedule = scheduler.scheduler(order, graph, gates)
 
-with open("output.txt", "w") as f:
+with open("pos.txt", "w") as f:
     for k in positions_history:
         f.write(str(k))
         f.write("\n")
-    f.write("\n")
+    
+with open("schedule.txt", "w") as f:
     for k in gates_schedule:
         f.write(str(k))
         f.write("\n")

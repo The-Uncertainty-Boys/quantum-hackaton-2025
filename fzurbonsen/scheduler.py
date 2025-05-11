@@ -25,6 +25,14 @@ def get_pos(ions):
         pos.append(ion.node)
     return pos
 
+def get_multiple_R(order, max, gates):
+    log = [0 for _ in range(max)]
+    for i in range(max):
+        k = order[i]
+        if gates[k].type in ["RY", "RX"]:
+            
+        
+
 def scheduler(order, graph, gates):
     positions_history = []
     gates_schedule = []
@@ -74,15 +82,13 @@ def scheduler(order, graph, gates):
                 positions_history.append(get_pos(ions))
                 gates_schedule.append([])
                 time += 1
-                print(get_pos(ions))
 
             for t in range(len(path2)):
                 node = path2[t]
-                ion1.node = node
+                ion2.node = node
                 positions_history.append(get_pos(ions))
                 gates_schedule.append([])
                 time += 1
-                print(get_pos(ions))
 
             positions_history.append(get_pos(ions))
             gates_schedule.append([(str(gate.type), gate.theta, [gate.qubit1, gate.qubit2])])
@@ -91,8 +97,11 @@ def scheduler(order, graph, gates):
             gates_schedule.append([])
             time += 1
 
-            path1 = nx.shortest_path(graph, source=ion1.node, target=(x1, y1, z1))
-            path2 = nx.shortest_path(graph, source=ion2.node, target=(x2, y2, z2))
+            path1 = []
+            path2 = []
+
+            path1 = nx.shortest_path(graph, source=i_node, target=(x1, y1, z1))
+            path2 = nx.shortest_path(graph, source=i_node, target=(x2, y2, z2))
 
             for t in range(len(path1)):
                 node = path1[t]
@@ -100,18 +109,12 @@ def scheduler(order, graph, gates):
                 positions_history.append(get_pos(ions))
                 gates_schedule.append([])
                 time += 1
-                print(get_pos(ions))
 
             for t in range(len(path2)):
                 node = path2[t]
-                ion1.node = node
+                ion2.node = node
                 positions_history.append(get_pos(ions))
                 gates_schedule.append([])
                 time += 1
-                print(get_pos(ions))
 
     return [positions_history, gates_schedule]
-
-
-    # print(positions_history)
-    # print(gates_schedule)
